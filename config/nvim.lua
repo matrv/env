@@ -6,7 +6,6 @@ return {
 			opts.sections.lualine_z = {}
 		end,
 	},
-
 	-- Catppuccin
 	{
 		"LazyVim/LazyVim",
@@ -24,18 +23,6 @@ return {
 	-- Disable tabs
 	{
 		"bufferline.nvim",
-		enabled = false,
-	},
-	{
-		"persistence.nvim",
-		enabled = false,
-	},
-	{
-		"todo-comments.nvim",
-		enabled = false,
-	},
-	{
-		"tokyonight.nvim",
 		enabled = false,
 	},
 	{
@@ -63,11 +50,6 @@ return {
 			},
 		},
 	},
-	-- Disable snippets
-	{
-		"rafamadriz/friendly-snippets",
-		enabled = false,
-	},
 	-- Undo tree
 	"mbbill/undotree",
 	{
@@ -86,15 +68,6 @@ return {
 			keymap = {
 				preset = "super-tab",
 			},
-		},
-	},
-	{
-		"snacks.nvim",
-		opts = {
-			scroll = { enabled = false },
-			zen = { enabled = false },
-			animate = { enabled = false },
-			terminal = { enabled = false },
 		},
 	},
 }
