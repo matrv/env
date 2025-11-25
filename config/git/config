@@ -3,6 +3,8 @@
   email = "35634442+matrv@users.noreply.github.com"
 [pull]
   merge = true
+[push]
+  default = current
 [init]
   defaultBranch = main
 [diff]
