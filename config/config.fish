@@ -13,7 +13,7 @@ if status is-interactive
     alias ls="eza -lah --icons --group-directories-first"
     alias v="nvim"
     alias lg="lazygit"
-    alias nu="taze -Il"
+    alias nu="taze -Il --maturity-period 3"
     alias ns="nr start"
     alias nd="nr dev"
     alias nb="nr build"
