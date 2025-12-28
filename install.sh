@@ -10,7 +10,11 @@ rpm-ostree install ghostty
 
 brew install gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim
 
-flatpak install -y --noninteractive flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.system76.Popsicle com.valvesoftware.Steam
+flatpak install -y --noninteractive flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.system76.Popsicle com.valvesoftware.Steam it.mijorus.gearlever
+
+curl "https://api.github.com/repos/imputnet/helium-linux/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/helium.AppImage
+
+yes | flatpak run it.mijorus.gearlever --integrate /tmp/helium.AppImage
 
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 1" "none,,Activate Task Manager Entry 1"
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 2" "none,,Activate Task Manager Entry 2"
@@ -88,7 +92,7 @@ starship preset nerd-font-symbols -o ~/.config/starship.toml
 starship config hostname.disabled true
 starship config username.disabled true
 
-wget "https://raw.githubusercontent.com/catppuccin/fish/refs/heads/main/themes/Catppuccin%20Mocha.theme" -O ~/.config/fish/themes/Catppuccin\ Mocha.theme
+curl "https://raw.githubusercontent.com/catppuccin/fish/refs/heads/main/themes/Catppuccin%20Mocha.theme" -o ~/.config/fish/themes/Catppuccin\ Mocha.theme
 cp ./config/config.fish ~/.config/fish
 fish -c "yes | fish_config theme save \"Catppuccin Mocha\""
 
