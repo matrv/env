@@ -21,11 +21,17 @@ if status is-interactive
     alias nde="na dedupe"
     alias cat="bat --plain"
 
-    function cdtemp
+    function newtemp
         set dir (mktemp -d)
-        builtin cd $dir
-        echo "You are now in $dir"
+        set session_name (basename $dir | string replace -a '.' '_')
+        echo "Creating tmux session '$session_name' in $dir"
         echo $dir | wl-copy
+        if set -q TMUX
+            tmux new-session -d -s $session_name -c $dir
+            tmux switch-client -t $session_name
+        else
+            tmux new-session -s $session_name -c $dir
+        end
     end
 
     set -Ux FZF_DEFAULT_OPTS "\

@@ -10,7 +10,7 @@ rpm-ostree install ghostty
 
 brew install gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim
 
-flatpak install -y --noninteractive flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.system76.Popsicle com.valvesoftware.Steam it.mijorus.gearlever
+flatpak install -y --noninteractive flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 
 curl "https://api.github.com/repos/imputnet/helium-linux/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/helium.AppImage
 
