@@ -8,7 +8,7 @@ curl -fsSL "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedor
 rpm-ostree refresh-md
 rpm-ostree install ghostty
 
-brew install gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tealdeer opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli
+brew install gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli
 
 flatpak install -y --noninteractive flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 
