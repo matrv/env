@@ -21,7 +21,7 @@ if status is-interactive
     alias nde="na dedupe"
     alias cat="bat --plain"
 
-    function newtemp
+    function tmp
         set dir (mktemp -d)
         set session_name (basename $dir | string replace -a '.' '_')
         echo "Creating tmux session '$session_name' in $dir"
