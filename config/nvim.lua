@@ -70,4 +70,19 @@ return {
 			},
 		},
 	},
+
+	{ import = "lazyvim.plugins.extras.ai.sidekick" },
+	{ import = "lazyvim.plugins.extras.ai.supermaven" },
+	{ import = "lazyvim.plugins.extras.coding.yanky" },
+	{ import = "lazyvim.plugins.extras.lang.json" },
+	{ import = "lazyvim.plugins.extras.lang.tailwind" },
+	{ import = "lazyvim.plugins.extras.lang.tailwind" },
+	{
+		"mason-org/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"typos-lsp",
+			},
+		},
+	},
 }
