@@ -1,20 +1,31 @@
 #!/bin/bash
+
+set -euo pipefail
+
+trap 'echo -e "\n\nInstallation interrupted by user"; exit 130' INT TERM
+
 sudo -v
 
 sudo hostnamectl set-hostname matvey-pc
 
 . /etc/os-release
 curl -fsSL "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedora-${VERSION_ID}/scottames-ghostty-fedora-${VERSION_ID}.repo" | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:scottames:ghostty.repo >/dev/null
+curl -fsSL "https://copr.fedorainfracloud.org/coprs/imput/helium/repo/fedora-${VERSION_ID}/imput-helium-fedora-${VERSION_ID}.repo" | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:imput:helium.repo >/dev/null
 rpm-ostree refresh-md
-rpm-ostree install ghostty
 
-brew install gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli
+packages_to_install=()
+[[ ! $(rpm -q ghostty 2>/dev/null) ]] && packages_to_install+=(ghostty)
+[[ ! $(rpm -q helium-bin 2>/dev/null) ]] && packages_to_install+=(helium-bin)
 
-flatpak install -y --noninteractive flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
+if [[ ${#packages_to_install[@]} -gt 0 ]]; then
+  rpm-ostree install "${packages_to_install[@]}"
+else
+  echo "ghostty and helium-bin are already installed"
+fi
 
-curl "https://api.github.com/repos/imputnet/helium-linux/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/helium.AppImage
+brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli
 
-yes | flatpak run it.mijorus.gearlever --integrate /tmp/helium.AppImage
+flatpak install -y --noninteractive --user flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam
 
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 1" "none,,Activate Task Manager Entry 1"
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 2" "none,,Activate Task Manager Entry 2"
@@ -108,11 +119,16 @@ mkdir -p ~/dev/oss
 
 cp -r ./config/git ~/.config
 
-rm -rf ~/.config/nvim
-git clone --depth 1 https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-cp ./config/nvim.lua ~/.config/nvim/lua/plugins
-echo "vim.g.lazyvim_prettier_needs_config = false" >>~/.config/nvim/lua/config/options.lua
+if [[ ! -d ~/.config/nvim ]] || [[ ! -f ~/.config/nvim/init.lua ]]; then
+  echo "Setting up neovim configuration..."
+  rm -rf ~/.config/nvim
+  git clone --depth 1 https://github.com/LazyVim/starter ~/.config/nvim
+  rm -rf ~/.config/nvim/.git
+  cp ./config/nvim.lua ~/.config/nvim/lua/plugins
+  echo "vim.g.lazyvim_prettier_needs_config = false" >>~/.config/nvim/lua/config/options.lua
+else
+  echo "✓ Neovim is already configured, skipping setup"
+fi
 
 mkdir -p ~/.local/bin
 mkdir -p ~/.config/tmux-sessionizer
