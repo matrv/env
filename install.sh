@@ -25,7 +25,7 @@ fi
 
 brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli
 
-flatpak install -y --noninteractive --user flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam
+flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam
 
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 1" "none,,Activate Task Manager Entry 1"
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 2" "none,,Activate Task Manager Entry 2"
@@ -110,7 +110,6 @@ cp ./config/config.fish ~/.config/fish
 fish -c "yes | fish_config theme save \"Catppuccin Mocha\""
 
 cp ./config/krunnerrc ~/.config
-cp ./config/mimeaaps.list ~/.config
 
 mkdir -p ~/dev/work
 mkdir -p ~/dev/sandbox
