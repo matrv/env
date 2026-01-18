@@ -68,7 +68,7 @@ kwriteconfig6 --file kglobalshortcutsrc --group services --group org.kde.spectac
 kwriteconfig6 --file kglobalshortcutsrc --group services --group org.kde.spectacle.desktop --key "RectangularRegionScreenShot" "Print"
 
 kwriteconfig6 --file kglobalshortcutsrc --group org_kde_powerdevil --key "powerProfile" "Battery,Battery\tMeta+B,Switch Power Profile"
-kwriteconfig6 --file kglobalshortcutsrc --group services --group org.chromium.Chromium.desktop --key "_launch" "Meta+B"
+kwriteconfig6 --file kglobalshortcutsrc --group services --group helium.desktop --key "_launch" "Meta+B"
 
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate application launcher" "none,,Activate Application Launcher"
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Overview" "Meta,Meta+W,Toggle Overview"
