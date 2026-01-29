@@ -92,6 +92,8 @@ kwriteconfig6 --file kdeglobals --group "General" --key "TerminalService" "com.m
 kwriteconfig6 --file kscreenlockerrc --group "Deamon" --key "RequirePassword" "false"
 kwriteconfig6 --file ksmserverrc --group "General" --key "loginMode" "emptySession"
 
+kwriteconfig6 --file PlasmaUserFeedback --group "Global" --key "FeedbackLevel" "64"
+
 echo -e "[AC][SuspendAndShutdown]\nAutoSuspendAction=0" >~/.config/powerdevilrc
 
 mkdir -p ~/.config/ghostty

@@ -20,6 +20,7 @@ if status is-interactive
     alias nb="nr build"
     alias nde="na dedupe"
     alias cat="bat --plain"
+    alias open="xdg-open"
 
     function tmp
         set dir (mktemp -d)
