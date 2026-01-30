@@ -89,7 +89,7 @@ kwriteconfig6 --file kdeglobals --group "KDE" --key "AnimationDurationFactor" "0
 kwriteconfig6 --file kdeglobals --group "General" --key "TerminalApplication" "ghostty"
 kwriteconfig6 --file kdeglobals --group "General" --key "TerminalService" "com.mitchellh.ghostty.desktop"
 
-kwriteconfig6 --file kscreenlockerrc --group "Deamon" --key "RequirePassword" "false"
+kwriteconfig6 --file kscreenlockerrc --group "Daemon" --key "RequirePassword" "false"
 kwriteconfig6 --file ksmserverrc --group "General" --key "loginMode" "emptySession"
 
 kwriteconfig6 --file PlasmaUserFeedback --group "Global" --key "FeedbackLevel" "64"
