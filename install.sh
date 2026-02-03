@@ -139,3 +139,4 @@ chmod +x ~/.local/bin/tmux-sessionizer
 
 /home/linuxbrew/.linuxbrew/bin/bun i -g @antfu/ni taze
 fish -c "/home/linuxbrew/.linuxbrew/bin/bun completions"
+~/.bun/bin/nr --completion-fish >~/.config/fish/completions/nr.fish
