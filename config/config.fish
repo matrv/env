@@ -45,6 +45,8 @@ if status is-interactive
     set -Ux EDITOR nvim
     set -Ux VISUAL nvim
     set -Ux MANPAGER "nvim +Man!"
+    set -Ux NI_DEFAULT_AGENT bun
+    set -Ux NI_GLOBAL_AGENT http
 
     fish_vi_key_bindings
 end
