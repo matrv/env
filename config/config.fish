@@ -21,6 +21,7 @@ if status is-interactive
     alias nde="na dedupe"
     alias cat="bat --plain"
     alias open="xdg-open"
+    alias mpv="/var/lib/flatpak/exports/bin/io.mpv.Mpv"
 
     function tmp
         set dir (mktemp -d)
