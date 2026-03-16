@@ -8,24 +8,18 @@ sudo -v
 
 sudo hostnamectl set-hostname matvey-pc
 
-. /etc/os-release
-curl -fsSL "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedora-${VERSION_ID}/scottames-ghostty-fedora-${VERSION_ID}.repo" | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:scottames:ghostty.repo >/dev/null
-curl -fsSL "https://copr.fedorainfracloud.org/coprs/imput/helium/repo/fedora-${VERSION_ID}/imput-helium-fedora-${VERSION_ID}.repo" | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:imput:helium.repo >/dev/null
-rpm-ostree refresh-md
+brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli taze ni
 
-packages_to_install=()
-[[ ! $(rpm -q ghostty 2>/dev/null) ]] && packages_to_install+=(ghostty)
-[[ ! $(rpm -q helium-bin 2>/dev/null) ]] && packages_to_install+=(helium-bin)
+flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 
-if [[ ${#packages_to_install[@]} -gt 0 ]]; then
-  rpm-ostree install "${packages_to_install[@]}"
-else
-  echo "ghostty and helium-bin are already installed"
-fi
+curl "https://api.github.com/repos/imputnet/helium-linux/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/helium.AppImage
 
-brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli
+curl "https://api.github.com/repos/pkgforge-dev/ghostty-appimage/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/ghostty.AppImage
 
-flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.qbittorrent.qBittorrent org.signal.Signal com.valvesoftware.Steam
+mkdir -p ~/AppImages
+
+yes | flatpak run it.mijorus.gearlever --integrate /tmp/helium.AppImage
+yes | flatpak run it.mijorus.gearlever --integrate /tmp/ghostty.AppImage
 
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 1" "none,,Activate Task Manager Entry 1"
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 2" "none,,Activate Task Manager Entry 2"
@@ -62,7 +56,7 @@ kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 9"
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "manage activities" "none,,Show Activity Switcher"
 kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window Close" "Meta+Q,Meta+Q,Close Window"
 
-kwriteconfig6 --file kglobalshortcutsrc --group services --group com.mitchellh.ghostty.desktop --key "_launch" "Meta+Return"
+kwriteconfig6 --file kglobalshortcutsrc --group services --group ghostty.desktop --key "_launch" "Meta+Return"
 
 kwriteconfig6 --file kglobalshortcutsrc --group services --group org.kde.spectacle.desktop --key "_launch" "Meta+Shift+S"
 kwriteconfig6 --file kglobalshortcutsrc --group services --group org.kde.spectacle.desktop --key "RectangularRegionScreenShot" "Print"
@@ -137,6 +131,5 @@ wget "https://raw.githubusercontent.com/ThePrimeagen/tmux-sessionizer/refs/heads
 cp ./config/tmux-sessionizer.conf ~/.config/tmux-sessionizer
 chmod +x ~/.local/bin/tmux-sessionizer
 
-/home/linuxbrew/.linuxbrew/bin/bun i -g @antfu/ni taze
 fish -c "/home/linuxbrew/.linuxbrew/bin/bun completions"
 ~/.bun/bin/nr --completion-fish >~/.config/fish/completions/nr.fish
