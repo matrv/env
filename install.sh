@@ -132,4 +132,4 @@ cp ./config/tmux-sessionizer.conf ~/.config/tmux-sessionizer
 chmod +x ~/.local/bin/tmux-sessionizer
 
 fish -c "/home/linuxbrew/.linuxbrew/bin/bun completions"
-~/.bun/bin/nr --completion-fish >~/.config/fish/completions/nr.fish
+/var/home/linuxbrew/.linuxbrew/bin/nr --completion-fish >~/.config/fish/completions/nr.fish
