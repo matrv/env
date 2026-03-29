@@ -51,4 +51,6 @@ if status is-interactive
     set -Ux NI_GLOBAL_AGENT http
 
     fish_vi_key_bindings
+
+    enable_transience
 end
