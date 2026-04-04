@@ -1,8 +1,4 @@
 return {
-	{ import = "lazyvim.plugins.extras.ai.supermaven" },
-	{ import = "lazyvim.plugins.extras.coding.yanky" },
-	{ import = "lazyvim.plugins.extras.lang.json" },
-	{ import = "lazyvim.plugins.extras.lang.tailwind" },
 	{
 		-- remove clock
 		"nvim-lualine/lualine.nvim",
@@ -79,8 +75,6 @@ return {
 		opts = {
 			ensure_installed = {
 				"typos-lsp",
-				"oxlint",
-				"oxfmt",
 			},
 		},
 	},

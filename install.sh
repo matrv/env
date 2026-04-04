@@ -120,7 +120,7 @@ if [[ ! -d ~/.config/nvim ]] || [[ ! -f ~/.config/nvim/init.lua ]]; then
   git clone --depth 1 https://github.com/LazyVim/starter ~/.config/nvim
   rm -rf ~/.config/nvim/.git
   cp ./config/nvim.lua ~/.config/nvim/lua/plugins
-  echo "vim.g.lazyvim_prettier_needs_config = false" >~/.config/nvim/lua/config/options.lua
+  sed -i 's/notify = false/notify = true/g' ~/.config/nvim/lua/config/lazy.lua
 else
   echo "✓ Neovim is already configured, skipping setup"
 fi
