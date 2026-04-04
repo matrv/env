@@ -8,7 +8,7 @@ sudo -v
 
 sudo hostnamectl set-hostname matvey-pc
 
-brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli taze ni vercel-cli
+brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode pnpm fd copyparty oven-sh/bun/bun neovim trash-cli taze ni vercel-cli starship
 
 flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv com.google.AndroidStudio org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 
@@ -97,9 +97,8 @@ cp ./config/tmux.conf ~/.tmux.conf
 
 mkdir -p ~/.config/fish/themes
 rm ~/.config/starship.toml
-starship preset nerd-font-symbols -o ~/.config/starship.toml
-starship config hostname.disabled true
-starship config username.disabled true
+/var/home/linuxbrew/.linuxbrew/bin/starship config hostname.disabled true
+/var/home/linuxbrew/.linuxbrew/bin/starship config username.disabled true
 
 curl "https://raw.githubusercontent.com/catppuccin/fish/refs/heads/main/themes/Catppuccin%20Mocha.theme" -o ~/.config/fish/themes/Catppuccin\ Mocha.theme
 cp ./config/config.fish ~/.config/fish
