@@ -21,7 +21,7 @@ if status is-interactive
     alias nde="na dedupe"
     alias cat="bat --plain"
     alias open="xdg-open"
-    alias oc="opencode"
+    alias oc="opencode attach http://localhost:4096 -u matvey -p \"{{OPENCODE_SERVER_PASSWORD}}\""
     alias mpv="/var/lib/flatpak/exports/bin/io.mpv.Mpv"
 
     function tmp

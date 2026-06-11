@@ -12,14 +12,16 @@ brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit di
 
 flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 
-curl "https://api.github.com/repos/imputnet/helium-linux/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/helium.AppImage
+if [[ ! -d ~/AppImages ]]; then
+  curl "https://api.github.com/repos/imputnet/helium-linux/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/helium.AppImage
 
-curl "https://api.github.com/repos/pkgforge-dev/ghostty-appimage/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/ghostty.AppImage
+  curl "https://api.github.com/repos/pkgforge-dev/ghostty-appimage/releases/latest" | jq -r '.assets[] | select(.name | contains("x86_64.AppImage")) | .browser_download_url' | xargs curl -L -o /tmp/ghostty.AppImage
 
-mkdir -p ~/AppImages
+  mkdir -p ~/AppImages
 
-yes | flatpak run it.mijorus.gearlever --integrate /tmp/helium.AppImage
-yes | flatpak run it.mijorus.gearlever --integrate /tmp/ghostty.AppImage
+  yes | flatpak run it.mijorus.gearlever --integrate /tmp/helium.AppImage
+  yes | flatpak run it.mijorus.gearlever --integrate /tmp/ghostty.AppImage
+fi
 
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 1" "none,,Activate Task Manager Entry 1"
 kwriteconfig6 --file kglobalshortcutsrc --group plasmashell --key "activate task manager entry 2" "none,,Activate Task Manager Entry 2"
@@ -100,9 +102,20 @@ rm ~/.config/starship.toml
 /var/home/linuxbrew/.linuxbrew/bin/starship config hostname.disabled true
 /var/home/linuxbrew/.linuxbrew/bin/starship config username.disabled true
 
-curl "https://raw.githubusercontent.com/catppuccin/fish/refs/heads/main/themes/Catppuccin%20Mocha.theme" -o ~/.config/fish/themes/Catppuccin\ Mocha.theme
-cp ./config/config.fish ~/.config/fish
-fish -c "yes | fish_config theme save \"Catppuccin Mocha\""
+if [[ ! -f ~/.config/systemd/user/opencode-web.service ]]; then
+  OPENCODE_PASSWORD="$(openssl rand -base64 32)"
+  mkdir -p ~/.config/systemd/user
+  sed -e "s|{{OPENCODE_SERVER_PASSWORD}}|$OPENCODE_PASSWORD|g" ./config/opencode-web.service >~/.config/systemd/user/opencode-web.service
+  loginctl enable-linger "$USER"
+  systemctl --user daemon-reload
+  systemctl --user enable opencode-web
+  systemctl --user start opencode-web
+else
+  OPENCODE_PASSWORD="$(grep -oP 'OPENCODE_SERVER_PASSWORD=\K.*' ~/.config/systemd/user/opencode-web.service)"
+fi
+
+sed -e "s|{{OPENCODE_SERVER_PASSWORD}}|$OPENCODE_PASSWORD|g" ./config/config.fish >~/.config/fish/config.fish
+fish -c "fish_config theme choose catppuccin-mocha --color-theme=dark"
 
 cp ./config/krunnerrc ~/.config
 
@@ -120,8 +133,6 @@ if [[ ! -d ~/.config/nvim ]] || [[ ! -f ~/.config/nvim/init.lua ]]; then
   rm -rf ~/.config/nvim/.git
   cp ./config/nvim.lua ~/.config/nvim/lua/plugins
   sed -i 's/notify = false/notify = true/g' ~/.config/nvim/lua/config/lazy.lua
-else
-  echo "✓ Neovim is already configured, skipping setup"
 fi
 
 mkdir -p ~/.local/bin
