@@ -8,7 +8,7 @@ sudo -v
 
 sudo hostnamectl set-hostname matvey-pc
 
-brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc opencode fd copyparty oven-sh/bun/bun neovim trash-cli taze ni vercel-cli starship tree-sitter-cli tpack fzf
+brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp tokei btop lazygit difftastic tlrc anomalyco/tap/opencode-v2 fd copyparty oven-sh/bun/bun neovim trash-cli taze ni vercel-cli starship tree-sitter-cli tpack fzf
 
 flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 
@@ -95,10 +95,6 @@ echo -e "[AC][SuspendAndShutdown]\nAutoSuspendAction=0" >~/.config/powerdevilrc
 mkdir -p ~/.config/ghostty
 cp ./config/ghostty ~/.config/ghostty/config
 
-mkdir -p ~/.config/opencode
-mkdir -p ~/.config/secrets
-cp ./config/opencode.json ~/.config/opencode/opencode.json
-
 cp ./config/tmux.conf ~/.tmux.conf
 tpack install
 
@@ -106,26 +102,6 @@ mkdir -p ~/.config/fish/themes
 rm ~/.config/starship.toml
 /var/home/linuxbrew/.linuxbrew/bin/starship config hostname.disabled true
 /var/home/linuxbrew/.linuxbrew/bin/starship config username.disabled true
-
-mkdir -p ~/.config/secrets
-if [[ ! -f ~/.config/secrets/opencode-password ]]; then
-  OPENCODE_PASSWORD="$(openssl rand -base64 32)"
-  printf 'OPENCODE_SERVER_PASSWORD=%s\n' "$OPENCODE_PASSWORD" >~/.config/secrets/opencode-password
-  chmod 600 ~/.config/secrets/opencode-password
-fi
-
-if [[ ! -f ~/.config/systemd/user/opencode-web.service ]]; then
-  mkdir -p ~/.config/systemd/user
-  cp ./config/opencode-web.service ~/.config/systemd/user/opencode-web.service
-  loginctl enable-linger "$USER"
-  systemctl --user daemon-reload
-  systemctl --user enable opencode-web
-  systemctl --user start opencode-web
-else
-  cp ./config/opencode-web.service ~/.config/systemd/user/opencode-web.service
-  systemctl --user daemon-reload
-  systemctl --user restart opencode-web
-fi
 
 cp ./config/config.fish ~/.config/fish/config.fish
 fish -c "fish_config theme choose catppuccin-mocha --color-theme=dark"
