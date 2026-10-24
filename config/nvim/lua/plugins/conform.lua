@@ -6,6 +6,7 @@ require("conform").setup({
 		local enabled_filetypes = {
 			javascript = true,
 			javascriptreact = true,
+			rust = true,
 			typescript = true,
 			typescriptreact = true,
 		}
@@ -19,6 +20,7 @@ require("conform").setup({
 	formatters_by_ft = {
 		javascript = { "oxfmt" },
 		javascriptreact = { "oxfmt" },
+		rust = { "rustfmt" },
 		typescript = { "oxfmt" },
 		typescriptreact = { "oxfmt" },
 	},

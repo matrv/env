@@ -1,6 +1,13 @@
 require("config.pack").add("neovim/nvim-lspconfig")
 
 local servers = {
+	rust_analyzer = {
+		settings = {
+			["rust-analyzer"] = {
+				check = { command = "clippy" },
+			},
+		},
+	},
 	tsgo = {
 		cmd = function(dispatchers, config)
 			local cmd = "tsc"
