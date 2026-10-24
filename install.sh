@@ -8,7 +8,7 @@ sudo -v
 
 sudo hostnamectl set-hostname matvey-pc
 
-brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp btop lazygit difftastic tlrc anomalyco/tap/opencode-v2 fd copyparty oven-sh/bun/bun neovim trash-cli taze ni vercel-cli starship tree-sitter-cli tpack fzf
+brew install --quiet gh ripgrep eza bat node ffmpeg yt-dlp btop lazygit difftastic tlrc anomalyco/tap/opencode-v2 fd copyparty oven-sh/bun/bun neovim trash-cli taze ni vercel-cli starship tree-sitter-cli tpack fzf watchexec
 
 flatpak install -y --noninteractive --system flathub com.obsproject.Studio org.chromium.Chromium org.libreoffice.LibreOffice io.mpv.Mpv org.signal.Signal com.valvesoftware.Steam it.mijorus.gearlever
 

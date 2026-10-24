@@ -1,6 +1,7 @@
 require("config.pack").add("neovim/nvim-lspconfig")
 
 local servers = {
+	gopls = {},
 	rust_analyzer = {
 		settings = {
 			["rust-analyzer"] = {

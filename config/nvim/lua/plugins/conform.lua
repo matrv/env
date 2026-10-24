@@ -4,6 +4,7 @@ require("conform").setup({
 	notify_on_error = false,
 	format_on_save = function(bufnr)
 		local enabled_filetypes = {
+			go = true,
 			javascript = true,
 			javascriptreact = true,
 			rust = true,
@@ -18,6 +19,7 @@ require("conform").setup({
 		lsp_format = "fallback",
 	},
 	formatters_by_ft = {
+		go = { "goimports" },
 		javascript = { "oxfmt" },
 		javascriptreact = { "oxfmt" },
 		rust = { "rustfmt" },
