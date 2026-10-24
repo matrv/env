@@ -4,6 +4,8 @@ if status is-interactive
     starship init fish | source
     fzf --fish | source
 
+    fish_add_path (brew --prefix rustup)/bin
+
     set -U fish_greeting
 
     alias ls="eza -lah --icons --group-directories-first"
