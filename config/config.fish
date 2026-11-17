@@ -6,7 +6,7 @@ if status is-interactive
 
     fish_add_path (brew --prefix rustup)/bin
 
-    set -U fish_greeting
+    set -g fish_greeting
 
     alias ls="eza -lah --icons --group-directories-first"
     alias v="nvim"
@@ -34,18 +34,23 @@ if status is-interactive
         end
     end
 
-    set -Ux FZF_DEFAULT_OPTS "\
+    set -gx FZF_DEFAULT_OPTS "\
       --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
       --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
       --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
       --color=selected-bg:#45475A \
       --color=border:#6C7086,label:#CDD6F4"
 
-    set -Ux EDITOR nvim
-    set -Ux VISUAL nvim
-    set -Ux MANPAGER "nvim +Man!"
-    set -Ux NI_DEFAULT_AGENT bun
-    set -Ux NI_GLOBAL_AGENT http
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+    set -gx MANPAGER "nvim +Man!"
+    set -gx NI_DEFAULT_AGENT bun
+    set -gx NI_GLOBAL_AGENT http
+
+    set -gx LLMMAN_RUNTIME bin
+    set -gx LLMMAN_LLM_LIBRARY vulkan
+    set -gx LLMMAN_IGPU_ENABLE 1
+    set -gx LLMMAN_NUM_PARALLEL 1
 
     fish_vi_key_bindings
 
